@@ -26,4 +26,12 @@ module.exports = function(server, cstore) {
     fail: rejectConnection
   }));
 
+  io.sockets.on('connection', function(socket) {
+
+    socket.emit('data', {
+      yolo: "yolo"
+    });
+
+  });
+
 }

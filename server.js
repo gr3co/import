@@ -65,6 +65,9 @@ if (env === 'development' || env === 'test') {
   app.use(express.errorHandler());
 }
 
+// allow public stuff
+app.use(express.static(__dirname + '/public'));
+
 // initialize passport
 require('./src/passport')(app);
 

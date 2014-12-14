@@ -7,20 +7,28 @@ function requireAuth(req, res, next) {
   if (!req.isAuthenticated()) {
     req.flash('error', "You need to log in to do that.");
     res.redirect('/');
+  } else {
+    // user is authenticated!
+    return next();
   }
-  res.locals.user = req.user;
-  return next();
 }
 
 function requireMobile(req, res, next) {
   if (!req.useragent.isMobile) {
     req.flash('error', "You can only view this page on mobile.");
     res.redirect('/');
+  } else {
+    // user is on mobile!
+    return next();
   }
-  return next();
 }
 
 module.exports = function(app) {
+
+  app.use(function(req, res, next) {
+    res.locals.user = req.user;
+    return next();
+  });
 
   app.get('/', function(req, res) {
     res.render('home', {
@@ -29,10 +37,11 @@ module.exports = function(app) {
     });
   });
 
-  app.get('/mobile', requireMobile, function(req, res) {
-    res.render('home', {
+  app.get('/find', requireAuth, requireMobile, function(req, res) {
+    res.render('find', {
       errors: req.flash('error'),
-      info: req.flash('info')
+      info: req.flash('info'),
+      scripts: true,
     });
   });
 
