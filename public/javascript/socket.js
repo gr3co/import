@@ -25,3 +25,5 @@
 	});
 
 })();
+
+$("#img-draggable").draggable({ revert: "invalid", scroll: false });

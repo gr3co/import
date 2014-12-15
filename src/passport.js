@@ -12,7 +12,7 @@ module.exports = function(app) {
     clientID: config.github.clientID,
     clientSecret: config.github.clientSecret,
     // change this if you're using a different port
-    callbackURL: "http://localhost:3000/login/cb"
+    callbackURL: "http://192.168.1.13:3000/login/cb"
   },
   function(accessToken, refreshToken, profile, done) {
    User.findOne({githubId: profile.id}, function(err, user){

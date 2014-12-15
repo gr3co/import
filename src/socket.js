@@ -50,7 +50,7 @@ module.exports = function(server, cstore) {
         loc.latitude, 
         function(err) {
           if (err) {
-            errorHandler('location', err);
+            //errorHandler('location', err);
           } else {
             socket.emit('locationOK');
           }
@@ -60,7 +60,7 @@ module.exports = function(server, cstore) {
     socket.on('requestCards', function() {
       User.findNearMe(user.id, 10, function(err, users) {
         if (err) {
-          errorHandler('requestCards', err);
+          //errorHandler('requestCards', err);
         } else {
           socket.emit('cards', users);
         }
