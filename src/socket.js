@@ -67,6 +67,10 @@ module.exports = function(server, cstore) {
       });
     });
 
+    socket.on('swipe', function(data) {
+      console.log(data);
+    });
+
   });
 
 }

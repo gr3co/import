@@ -24,6 +24,27 @@
 		console.log(cards);
 	});
 
-})();
+	$(".card").draggable({ 
+		revert: false, 
+		scroll: false,
+		stop: function(event, ui) {
+			
+			// The minimum delta-X to trigger a 'swipe'
+			var swipeThreshold = $(window).width() - 100;
 
-$("#img-draggable").draggable({ revert: "invalid", scroll: false });
+			if (ui.position.left < -swipeThreshold) {
+				socket.emit('swipe', {
+					direction: 'left'
+				});
+			} else if (ui.position.left > swipeThreshold) {
+				socket.emit('swipe', {
+					direction: 'right'
+				});
+			}
+
+			// Revert back to original position
+			$(event.target).animate(ui.originalPosition);
+		}
+	});
+
+})();
