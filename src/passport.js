@@ -28,7 +28,7 @@ module.exports = function(app) {
         username: profile.username,
         name: profile.displayName,
         email: profile['_json'].email,
-        location: profile['_json'].location,
+        city: profile['_json'].location,
         photo: profile['_json']['avatar_url'],
       });
       newUser.save(function(err, result){
