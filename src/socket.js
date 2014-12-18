@@ -29,13 +29,6 @@ module.exports = function(server, cstore) {
 
   io.sockets.on('connection', function(socket) {
 
-    var errorHandler = function(source, err){
-      socket.emit('error', {
-        source: source,
-        error: err
-      });
-    };
-
     // for auth related purposes
     var user = socket.conn.request.user;
 
@@ -44,23 +37,25 @@ module.exports = function(server, cstore) {
 
     // save the users location
     socket.on('location', function(loc) {
-      User.updateLocation(
+      if (loc.longitude && loc.latitude) {
+        User.updateLocation(
         user.id, 
         loc.longitude, 
         loc.latitude, 
         function(err) {
           if (err) {
-            //errorHandler('location', err);
+            console.log(err);
           } else {
             socket.emit('locationOK');
           }
         });
+      }
     });
 
     socket.on('requestCards', function() {
       User.findNearMe(user.id, 10, function(err, users) {
         if (err) {
-          //errorHandler('requestCards', err);
+          console.log(err);
         } else {
           socket.emit('cards', users);
         }

@@ -45,6 +45,35 @@ module.exports = function(app) {
     });
   });
 
+  app.get('/profile', requireAuth, requireMobile, function(req, res) {
+    return res.redirect('/profile/me');
+  });
+
+  app.get('/profile/me', requireAuth, requireMobile, function(req, res) {
+    res.render('profile', {
+      errors: req.flash('error'),
+      info: req.flash('info'),
+      user: req.user,
+      editable: true
+    });
+  });
+
+  app.get('/profile/:user', requireAuth, requireMobile, function(req, res) {
+    User.findOne({username: req.params.user}, function(err, user) {
+      if (err) {
+        req.flash('error', err);
+      }
+      if (user == null) {
+        req.flash('error', "User not found.");
+      }
+      res.render('profile', {
+        errors: req.flash('error'),
+        info: req.flash('info'),
+        user: user
+      });
+    });
+  });
+
   app.get('/login', passport.authenticate('github'));
 
   app.get('/login/cb', 

@@ -44,6 +44,7 @@ userSchema.statics.findNearMe = function(id, rad, next) {
 
 						// only return 10 results... this can be changed
 						num: 10
+
 					},
 					next);
 			}

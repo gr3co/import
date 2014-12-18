@@ -6,6 +6,7 @@ var express = require('express'),
   expressValidator = require('express-validator'),
   env = process.env.NODE_ENV || 'development',
   useragent = require('express-useragent'),
+  sass = require('node-sass-middleware'),
   fs = require('fs'),
   util = require('util');
 
@@ -64,6 +65,14 @@ if (env === 'development' || env === 'test') {
 } else if (env === 'production') {
   app.use(express.errorHandler());
 }
+
+// compile dat scss
+app.use(sass({
+  src: __dirname, 
+  dest: __dirname + '/public',
+  outputStyle: 'compressed'  
+}));  
+
 
 // allow public stuff
 app.use(express.static(__dirname + '/public'));
