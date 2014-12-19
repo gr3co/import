@@ -1,28 +1,28 @@
 #cards-placeholder {
-	height: 400px;
-	width: 100%;
-	position: relative;
+  height: 400px;
+  width: 100%;
+  position: relative;
 }
 
 .card, .card img {
-	-webkit-transform: translateZ(0);
-	-moz-transition: none;
-	-o-transition: none;
-	-webkit-transition: none;
-	transition: none;
-	position: absolute;
+  -webkit-transform: translateZ(0);
+  -moz-transition: none;
+  -o-transition: none;
+  -webkit-transition: none;
+  transition: none;
+  position: absolute;
 }
 
 .img-profile {
-	float: left;
-	margin: 10px;
-	width: 40%;
+  float: left;
+  margin: 10px;
+  width: 40%;
 }
 
 .profile-right {
-	float: right;
+  float: right;
 }
 
 .profile-main {
-	clear: both;
+  clear: both;
 }

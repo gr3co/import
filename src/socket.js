@@ -39,16 +39,16 @@ module.exports = function(server, cstore) {
     socket.on('location', function(loc) {
       if (loc.longitude && loc.latitude) {
         User.updateLocation(
-        user.id, 
-        loc.longitude, 
-        loc.latitude, 
-        function(err) {
-          if (err) {
-            console.log(err);
-          } else {
-            socket.emit('locationOK');
-          }
-        });
+          user.id, 
+          loc.longitude, 
+          loc.latitude, 
+          function(err) {
+            if (err) {
+              console.log(err);
+            } else {
+              socket.emit('locationOK');
+            }
+          });
       }
     });
 
@@ -57,12 +57,12 @@ module.exports = function(server, cstore) {
         user.id, // current user
         1000,  // search radius
         function(err, users) {
-        if (err) {
-          console.log(err);
-        } else {
-          socket.emit('cards', [user, user, user]);
-        }
-      });
+          if (err) {
+            console.log(err);
+          } else {
+            socket.emit('cards', [user, user, user]);
+          }
+        });
     });
 
     socket.on('swipe', function(data) {
