@@ -13,13 +13,13 @@ function requireAuth(req, res, next) {
   }
 }
 
-function requireMobile(req, res, next) {
+function requireMobileAuth(req, res, next) {
   if (!req.useragent.isMobile) {
     req.flash('error', "You can only view this page on mobile.");
     res.redirect('/');
   } else {
     // user is on mobile!
-    return next();
+    return requireAuth(req, res, next);
   }
 }
 
@@ -33,11 +33,12 @@ module.exports = function(app) {
   app.get('/', function(req, res) {
     res.render('home', {
       errors: req.flash('error'),
-      info: req.flash('info')
+      info: req.flash('info'),
+      mobile: req.useragent.isMobile
     });
   });
 
-  app.get('/find', requireAuth, requireMobile, function(req, res) {
+  app.get('/find', requireMobileAuth, function(req, res) {
     res.render('find', {
       errors: req.flash('error'),
       info: req.flash('info'),
@@ -45,20 +46,20 @@ module.exports = function(app) {
     });
   });
 
-  app.get('/profile', requireAuth, requireMobile, function(req, res) {
+  app.get('/profile', requireMobileAuth, function(req, res) {
     return res.redirect('/profile/me');
   });
 
-  app.get('/profile/me', requireAuth, requireMobile, function(req, res) {
+  app.get('/profile/me', requireMobileAuth, function(req, res) {
     res.render('profile', {
       errors: req.flash('error'),
       info: req.flash('info'),
-      user: req.user,
+      profile: req.user,
       editable: true
     });
   });
 
-  app.get('/profile/:user', requireAuth, requireMobile, function(req, res) {
+  app.get('/profile/:user', requireMobileAuth, function(req, res) {
     User.findOne({username: req.params.user}, function(err, user) {
       if (err) {
         req.flash('error', err);
@@ -69,7 +70,7 @@ module.exports = function(app) {
       res.render('profile', {
         errors: req.flash('error'),
         info: req.flash('info'),
-        user: user
+        profile: user
       });
     });
   });

@@ -1,9 +1,28 @@
-.card {
-	img {
-		-webkit-transform: translateZ(0);
-		-moz-transition: none;
-		-o-transition: none;
-		-webkit-transition: none;
-		transition: none;
-	}
+#cards-placeholder {
+	height: 400px;
+	width: 100%;
+	position: relative;
+}
+
+.card, .card img {
+	-webkit-transform: translateZ(0);
+	-moz-transition: none;
+	-o-transition: none;
+	-webkit-transition: none;
+	transition: none;
+	position: absolute;
+}
+
+.img-profile {
+	float: left;
+	margin: 10px;
+	width: 40%;
+}
+
+.profile-right {
+	float: right;
+}
+
+.profile-main {
+	clear: both;
 }

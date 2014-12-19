@@ -53,11 +53,14 @@ module.exports = function(server, cstore) {
     });
 
     socket.on('requestCards', function() {
-      User.findNearMe(user.id, 10, function(err, users) {
+      User.findNearMe(
+        user.id, // current user
+        1000,  // search radius
+        function(err, users) {
         if (err) {
           console.log(err);
         } else {
-          socket.emit('cards', users);
+          socket.emit('cards', [user, user, user]);
         }
       });
     });

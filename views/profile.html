@@ -1,4 +1,35 @@
 {{>navbar}}
 {{>error_flash}}
 
+<div class="container">
+	<div class="profile-header">
+		<img src="{{profile.photo}}" class="img-profile img-thumbnail" />
+		<div class="profile-right">
+			<h3>{{profile.name}}<br>
+				<small>@{{profile.username}}</small><br>
+				{{#if profile.email}}
+				<small>{{profile.email}}</small><br>
+				{{/if}}
+				{{#if profile.city}}
+				<small>{{profile.city}}</small>
+				{{/if}}
+			</h3>
+		</div>
+	</div>
+	<div class="profile-main">
+		<div class="panel panel-default profile-languages">
+			<div class="panel-heading">Languages and Frameworks</div>
+  			<div class="panel-body">
+    			Java, C, Node.js, Python, Objective-C
+  			</div>
+		</div>
+		<div class="panel panel-default profile-interests">
+			<div class="panel-heading">Project Interests</div>
+  			<div class="panel-body">
+    			This stupid shit
+  			</div>
+		</div>
+	</div>
+</div>
+
 {{>footer}}
