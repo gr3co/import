@@ -11,6 +11,7 @@ var express = require('express'),
   util = require('util');
 
 GLOBAL.config = require('./src/config')[env];
+
 var cstore = new MongoStore(config.db);
 
 // create and configure express app
@@ -27,7 +28,7 @@ app.engine('html', hbs.engine);
 app.set('view engine', 'html');
 
 app.set('port', config.port);
-app.set('title', config.app.name);
+app.set('title', config.name);
 
 // middlewares
 app.use(express.logger('dev'));

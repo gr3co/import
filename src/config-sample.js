@@ -2,62 +2,51 @@ var _ = require('underscore'),
 
 global = {
 
+  // Allows us to name files based on absolute location
   root: __dirname,
 
-  app: {
-    name: 'Import'
-  },
+  // The name of the app
+  name: 'Import',
 
-  // comment out this line if you want to use different ports 
-  // for developement & production environments
+  // The DNS name of the server that the app is running on
+  host: 'http://HOST_NAME',
+
+  // The port the app should listen on
   port: 3000,
 
+  // You must register an app on Github and provide the credentials
   github: {
-    clientID: 'GITHUB_CLIENT_ID',
-    clientSecret: 'GITHUB_CLIENT_SECRET',
+    clientID: 'GITHUB_CLIENT', // change this
+    clientSecret: 'GITHUB_SECRET', // change this
   }
 
-};
+},
 
+// Settings specific to a development environment
 development = {
   db: {
-    db: 'DEV_DB',
+    db: 'import-dev',
     host: '127.0.0.1'
   },
   cookie: {
     secret: 'development',
     maxAge: 1000 * 60 * 60 * 12
-  },
-  allowRepl : false
-};
+  }
+},
 
+// Settings specific to a production environment
 production = {
   db: {
-    db: 'PROD_DB',
-    host: '127.0.0.1'
+    db: 'PROD_DB', // change this
+    host: 'PROD_HOST' // change this
   },
   cookie: {
-    secret: 'COOKIE_SECRET', // change this, obviously
+    secret: 'PROD_COOKIE_SECRET', // change this
     maxAge: 1000 * 60 * 60 * 12
-  },
-  allowRepl : false
-};
-
-repl = {
-  db: {
-    db: 'DEV_DB',
-    host: '127.0.0.1'
-  },
-  cookie: {
-    secret: 'repl',
-    maxAge: 1000 * 60 * 60 * 12
-  },
-  allowRepl : true
-};
-
+  }
+},
 
 module.exports = {
-  repl: _.extend({}, global, repl),
   development: _.extend({}, global, development),
   production: _.extend({}, global, production)
 };

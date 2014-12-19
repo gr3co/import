@@ -11,8 +11,7 @@ module.exports = function(app) {
   passport.use(new GitHubStrategy({
     clientID: config.github.clientID,
     clientSecret: config.github.clientSecret,
-    // change this if you're using a different port
-    callbackURL: "http://192.168.1.13:3000/login/cb"
+    callbackURL: config.host + ":" + config.port + "/login/cb"
   },
   function(accessToken, refreshToken, profile, done) {
    User.findOne({githubId: profile.id}, function(err, user){
