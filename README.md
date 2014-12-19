@@ -1,4 +1,4 @@
-import
+import hacker;
 ======
 
 A Tinder-like website to help hackers find each other.
