@@ -60,7 +60,7 @@ module.exports = function(server, cstore) {
           if (err) {
             console.log(err);
           } else {
-            socket.emit('cards', [user, user, user]);
+            socket.emit('cards', [user, user, user, user, user]);
           }
         });
     });

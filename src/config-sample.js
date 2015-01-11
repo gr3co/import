@@ -44,7 +44,7 @@ production = {
     secret: 'PROD_COOKIE_SECRET', // change this
     maxAge: 1000 * 60 * 60 * 12
   }
-},
+};
 
 module.exports = {
   development: _.extend({}, global, development),
